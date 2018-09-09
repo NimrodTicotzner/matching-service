@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+#  kafka-connect-worker:
+#    image: kafka-connect-worker
+#    environment:
+#      CONNECT_BOOTSTRAP_SERVERS: 'kafka:29092'
+#      CONNECT_REST_PORT: 28083
+#      CONNECT_GROUP_ID: connect
+#      CONNECT_CONFIG_STORAGE_TOPIC: "connect.config"
+#      CONNECT_OFFSET_STORAGE_TOPIC: "connect.offsets"
+#      CONNECT_STATUS_STORAGE_TOPIC: "connect.status"
+#      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+#      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+#      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+#      CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+#      CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+#      CONNECT_INTERNAL_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+#      CONNECT_INTERNAL_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+#      CONNECT_REST_ADVERTISED_HOST_NAME: "localhost"
+#    ports:
+#      - "28083:28083"
+#    depends_on:
+#      - kafka
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:4.1.1-2
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 32181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "32181:32181"
+
+  kafka:
+    image: confluentinc/cp-kafka:4.1.1-2
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports:
+      - "29092:29092"
+    depends_on:
+      - zookeeper
+    volumes:
+      - ~/Documents/pre-load.sh:/usr/bin/pre-load.sh
