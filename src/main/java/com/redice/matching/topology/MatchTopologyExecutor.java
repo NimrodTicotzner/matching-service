@@ -1,9 +1,7 @@
 package com.redice.matching.topology;
 
-import com.redice.matching.entities.MatchRequestJoiner;
+import java.util.concurrent.ExecutionException;
 
 public interface MatchTopologyExecutor {
-
-    void deployMatchTopology(String appName, MatchRequestJoiner matchRequestJoiner);
-
+    String deployAfMatchTopology(String appName, String matchTopicX, String matchTopicY, int expectedMsgsCount) throws ExecutionException, InterruptedException;
 }

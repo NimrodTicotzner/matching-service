@@ -7,4 +7,5 @@ public interface KeysGenerator {
 
     String composeComplexKey(MatchRequestJoiner matchRequestJoiner, MatchRequest matchRequest);
 
+    String composeHashedKey(String v);
 }

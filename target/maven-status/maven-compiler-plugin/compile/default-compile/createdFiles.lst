@@ -9,5 +9,6 @@ com/redice/matching/rest/MatchTopologyController.class
 com/redice/matching/entities/Joiner.class
 com/redice/matching/topology/MatchTopologyExecutor.class
 com/redice/matching/entities/MatchRequest.class
+com/redice/matching/topology/Task.class
 com/redice/matching/entities/Operator.class
 com/redice/matching/entities/MatchRequestJoiner.class

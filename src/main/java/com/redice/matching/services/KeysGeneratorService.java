@@ -41,4 +41,19 @@ public class KeysGeneratorService implements KeysGenerator {
         return composedKey[0];
     }
 
+    @Override
+    public String composeHashedKey(String v) {
+        return String.valueOf(hash(v));
+    }
+
+    private long hash(String s) {
+        long h = 1125899906842597L; // prime
+        int len = s.length();
+
+        for (int i = 0; i < len; i++) {
+            h = 31*h + s.charAt(i);
+        }
+        return h;
+    }
+
 }
